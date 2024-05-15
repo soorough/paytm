@@ -1,9 +1,8 @@
 const express = require("express");
-import { z } from "zod";
+const { z } = require("zod");
 const router = express.Router();
-import JWT_SECRET from "../config";
-import { authMiddleware } from "../middleware/auth";
-import { Account } from "../db";
+const { authMiddleware } = require("../middleware/auth");
+const { Account, User } = require("../db");
 const jwt = require("jsonwebtoken");
 
 const signupBody = z.object({
@@ -50,7 +49,7 @@ router.post("/signup", async (req, res) => {
     {
       userId,
     },
-    JWT_SECRET
+    process.env.JWT_SECRET
   );
 
   res.json({
@@ -150,4 +149,4 @@ router.get("/bulk", async (req, res) => {
   });
 });
 
-module.exports = user;
+module.exports = router;

@@ -1,7 +1,7 @@
 const express = require("express");
-const { router } = require(".");
 const { Account } = require("../db");
 const { authMiddleware } = require("../middleware/auth");
+const router = express.Router();
 
 router.get("/balance", authMiddleware, async (req, res) => {
   const account = await Account.findOne({
@@ -96,4 +96,4 @@ router.post("/transfer", authMiddleware, async (req, res) => {
   console.log("done");
 });
 
-module.exports = account;
+module.exports = router;
